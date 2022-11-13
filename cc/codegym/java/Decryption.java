@@ -2,7 +2,7 @@ package cc.codegym.java;
 
 public class Decryption {
 
-    String text;
+    static String text;
 
     public Decryption(String text) {
         this.text = text;
