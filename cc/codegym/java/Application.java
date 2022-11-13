@@ -18,7 +18,7 @@ public class Application {
    //     String cypheredMessage = cypher.cypher(originalMessage);
    //     String finalMessage = cypher.decypher(cypheredMessage);
  //
- //       System.out.println(originalMessage);
+ //       System.out.println(originalMessage) ;
  //       System.out.println(cypheredMessage);
  //       System.out.println(finalMessage);
  //       System.out.println(originalMessage.equals(finalMessage));
@@ -33,13 +33,13 @@ public class Application {
                      String line = file.nextLine();
                      System.out.println(line);
                      System.out.println(cypher.decypher(line));
-                     
+
 
                  }
              }
 
         } else if (mode == 2) {
-            // bruteForce
+            // bruteForce or mode 2
         }
         else System.out.println("Please input only the number 1 or 2");
 
