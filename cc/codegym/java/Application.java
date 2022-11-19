@@ -14,7 +14,9 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
 
-        CaesarCypher cypher = new CaesarCypher(3);
+        CaesarCypher cypher = new CaesarCypher(6);
+       // Encryption encryption = new Encryption();
+       // Decryption decryption = new Decryption();
         //  String originalMessage = "Coffee is the best fuel to code Java";
         // String cypheredMessage = cypher.cypher(originalMessage);
         //String finalMessage = cypher.decypher(cypheredMessage);
@@ -38,9 +40,9 @@ public class Application {
                     while (file.hasNextLine()) {
                         String line = file.nextLine();
                         System.out.println(line);
-                        System.out.println(cypher.decypher(line));
+                        System.out.println(cypher.cypher(line));
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter("TextFileOutput3.txt"))) {
-                            writer.write(cypher.decypher(line));
+                            writer.write(cypher.cypher(line));
                             writer.close();
                         }
                     }
@@ -50,70 +52,59 @@ public class Application {
                     while (file.hasNextLine()) {
                         String line = file.nextLine();
                         System.out.println(line);
-                        System.out.println(cypher.cypher(line));
+                        System.out.println(cypher.decypher(line));
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter("TextFileOutput3.txt"))) {
-                            writer.write(cypher.cypher(line));
+                            writer.write(cypher.decypher(line));
                             writer.close();
                         }
                     }
                 }
             }
 
-        } else if (mode == 2) {
-
+        }  else if (mode == 2) {
             try (Scanner file = new Scanner(Paths.get("TextFileOutput3.txt"))) {
                 while (file.hasNextLine()) {
                     String line = file.nextLine();
-                    char[] ciphertext = line.toUpperCase().toCharArray();
-                    char c;
-                    char[] plaintext = new char[ciphertext.length];
-                    String test;
-                    String search = "THE"; // Pattern
-                    boolean keyFound = false;
+                    String standalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    String encryptmessageupper = line.toUpperCase();
+                    StringBuilder sbdecrypt = new StringBuilder(encryptmessageupper);
 
-                   // while(!keyFound)
-                    {
-                        for (int key = 1; key < 25; key++)
-                        {
-                            for (int i = 0; i < ciphertext.length; i++)
-                            {
-                                if(ciphertext[i] >= 'A' && ciphertext[i] <= 'Z')
-                                {
-                                    c = (char) (Math.floorMod(ciphertext[i] - 65 - key, 26) + 65);
-                                    plaintext[i] = c;
-                                    break;
+
+
+                    int key;
+                    int i;
+                    int index;
+                    char currentchar;
+                    char newchar;
+
+                    for (key = 1; key < 27; key++) {
+
+                        sbdecrypt = new StringBuilder(encryptmessageupper);
+
+                        for (i = 0; i < sbdecrypt.length(); i++) {
+                            currentchar = sbdecrypt.charAt(i);
+                            index = standalpha.indexOf(currentchar);
+                            if (index != -1) {
+                                index = index - key;
+                                if (index < 0) {
+                                    index = index + 26;
                                 }
-                                else if(Character.isWhitespace(ciphertext[i]))
-                                {
-                                    plaintext[i] = 32;
-                                    break;
-                                }
+                                newchar = standalpha.charAt(index);
+                                sbdecrypt.setCharAt(i, newchar);
                             }
-                            test = String.valueOf(plaintext);
-                            if (test.contains(search))
-                            {
-                                keyFound = true;
-                                System.out.println(test);
-                                break;
-                            }
-                            System.out.println(test);
                         }
-
+                        System.out.println("Key: " + key + " Decrypted String: " + sbdecrypt);
                     }
-                   //  return test;
-
-
                 }
+            }
+        }
 
 
-                        }
+        else System.out.println("Please input only the number 1 or 2");
 
+    }
 
-
-
-        } else System.out.println("Please input only the number 1 or 2");
-
-    }}
+}
 
 
 

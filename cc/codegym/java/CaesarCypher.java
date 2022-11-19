@@ -9,6 +9,7 @@ public class CaesarCypher {
     }
 
     public String cypher(String text) {
+        String alphabet ="ABCDEFGHIJKLMNOPQRST";
         StringBuilder builder = new StringBuilder();
         for (int i=0; i < text.length(); i++) {
             char c = (char) (text.charAt(i) + cypherKey);
@@ -18,6 +19,7 @@ public class CaesarCypher {
     }
 
     public String decypher(String text) {
+        String alphabet ="ABCDEFGHIJKLMNOPQRST";
         StringBuilder builder = new StringBuilder();
         for (int i=0; i < text.length(); i++) {
             char c = (char) (text.charAt(i) - cypherKey);
