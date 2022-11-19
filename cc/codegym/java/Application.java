@@ -57,12 +57,65 @@ public class Application {
                         }
                     }
                 }
-            } else if (mode == 2) {
+            }
+
+        } else if (mode == 2) {
+
+            try (Scanner file = new Scanner(Paths.get("TextFileOutput3.txt"))) {
+                while (file.hasNextLine()) {
+                    String line = file.nextLine();
+                    char[] ciphertext = line.toUpperCase().toCharArray();
+                    char c;
+                    char[] plaintext = new char[ciphertext.length];
+                    String test;
+                    String search = "THE"; // Pattern
+                    boolean keyFound = false;
+
+                   // while(!keyFound)
+                    {
+                        for (int key = 1; key < 25; key++)
+                        {
+                            for (int i = 0; i < ciphertext.length; i++)
+                            {
+                                if(ciphertext[i] >= 'A' && ciphertext[i] <= 'Z')
+                                {
+                                    c = (char) (Math.floorMod(ciphertext[i] - 65 - key, 26) + 65);
+                                    plaintext[i] = c;
+                                    break;
+                                }
+                                else if(Character.isWhitespace(ciphertext[i]))
+                                {
+                                    plaintext[i] = 32;
+                                    break;
+                                }
+                            }
+                            test = String.valueOf(plaintext);
+                            if (test.contains(search))
+                            {
+                                keyFound = true;
+                                System.out.println(test);
+                                break;
+                            }
+                            System.out.println(test);
+                        }
+
+                    }
+                   //  return test;
 
 
-            } else System.out.println("Please input only the number 1 or 2");
+                }
 
-        }
-    }
-}
+
+                        }
+
+
+
+
+        } else System.out.println("Please input only the number 1 or 2");
+
+    }}
+
+
+
+
 
